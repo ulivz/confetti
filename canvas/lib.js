@@ -123,7 +123,10 @@ class Confetti {
     let remainingFlakes = 0;
     let particle;
     this.angle += 0.01;
-    this.tiltAngle += 0.1;
+    if (this.angle > Math.PI) {
+      this.angle = 0;
+    }
+    this.tiltAngle += 0.01;
 
     for (let i = 0; i < this.mp; i++) {
       particle = this.particles[i];
@@ -151,7 +154,7 @@ class Confetti {
   stepParticle (particle, particleIndex) {
     particle.tiltAngle += particle.tiltAngleIncremental;
     particle.y += ((Math.cos(this.angle + particle.d) + 3 + particle.r / 2) / 2) * this.velocity;
-    particle.x += Math.sin(this.angle);
+    // particle.x += Math.sin(this.angle);
     particle.tilt = (Math.sin(particle.tiltAngle - (particleIndex / 3))) * 15;
   }
 
